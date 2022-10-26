@@ -1,4 +1,4 @@
-require "logan.options"
+require("logan.options")
 require "logan.binds"
 require "logan.plugins"
 require "logan.nvim-tree"

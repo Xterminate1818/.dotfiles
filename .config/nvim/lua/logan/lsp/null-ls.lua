@@ -18,7 +18,9 @@ require("null-ls").setup({
       filetypes = {}
     }),
     require("null-ls").builtins.hover.printenv,
-
+    require("null-ls").builtins.diagnostics.fish,
+    require("null-ls").builtins.formatting.fish_indent,
+    require("null-ls").builtins.diagnostics.fish
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
