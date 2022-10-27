@@ -57,11 +57,20 @@ my_widgets = [
     widget.GenPollText(func=wifiEmoji, background=backing_color, update_interval=15),
     closer(),
     widget.Spacer(length=5),
-    opener(),
-    widget.GenPollText(func=batteryEmoji, background=backing_color, update_interval=60),
-    widget.Battery(background=backing_color, format=" {percent:2.0%}"),
-    closer(),
-    widget.Spacer(length=5),
-]
+    ]
+
+if has_battery():
+    battery_widgets = [
+        opener(),
+        widget.GenPollText(func=batteryEmoji, background=backing_color, update_interval=60),
+        widget.Battery(background=backing_color, format=" {percent:2.0%}"),
+        closer(),
+    ]
+    for b in battery_widgets:
+        my_widgets.append(b)
+
+my_widgets.append(widget.Spacer(length=5))
+
+    
 
 

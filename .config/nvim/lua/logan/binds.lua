@@ -6,6 +6,28 @@ function map(mode, input, output)
   keymap(mode, input, output, opts)
 end
 
+function amap(input, output)
+  keymap("n", input, output, opts)
+  keymap("i", input, output, opts)
+  keymap("v", input, output, opts)
+end
+
+-- Disable f keys
+amap("<F1>", "<Nop>")
+amap("<F2>", "<Nop>")
+amap("<F3>", "<Nop>")
+amap("<F4>", "<Nop>")
+amap("<F5>", "<Nop>")
+amap("<F6>", "<Nop>")
+amap("<F7>", "<Nop>")
+amap("<F8>", "<Nop>")
+amap("<F9>", "<Nop>")
+amap("<F10>", "<Nop>")
+amap("<F11>", "<Nop>")
+amap("<F12>", "<Nop>")
+
+
+
 -- Leader key
 map("", "<space>", "<Nop>")
 vim.g.mapleader = " "
@@ -52,7 +74,7 @@ nmap("gD", ":lua vim.lsp.buf.declaration()<cr>")
 nmap("gT", ":lua vim.lsp.buf.type_definition()<cr>")
 nmap("gd", ":lua vim.lsp.buf.definition()<cr>")
 nmap("gI", ":lua vim.lsp.buf.implementation()<cr>")
-nmap("K", ":lua vim.lsp.buf.hover()<cr>")
+nmap("<leader>w", ":lua vim.lsp.buf.hover()<cr>")
 
 
 

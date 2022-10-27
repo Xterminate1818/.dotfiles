@@ -6,7 +6,7 @@ from util import *
 screens = [
     Screen(
         #wallpaper="/home/logan/Images/wallpapers/648824.jpg",
-        wallpaper="/home/logan/Pictures/wallpapers/648824.jpg",
+        #wallpaper="/home/logan/Pictures/wallpapers/648824.jpg",
         top=bar.Bar(
             my_widgets, 45,
             background=colors["light-green"],

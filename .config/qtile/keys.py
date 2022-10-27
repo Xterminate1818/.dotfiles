@@ -1,5 +1,6 @@
 from libqtile.config import Key
 from libqtile.lazy import lazy
+from util import *
 
 mod = "mod1"
 terminal = "kitty"
@@ -26,5 +27,11 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawn(rofi_command), desc="Spawn a command using a prompt widget"),
-    Key([mod], "t", lazy.spawn('kitty --class floating'))
+    Key([mod], "t", lazy.spawn('kitty --class floating')),
+    Key([mod], "n", lazy.set_wallpaper(cycle_wallpaper(), mode='fill')),
+    Key([mod], "f", lazy.spawn("kitty --session ranger.session")),
+    Key([mod, "control"], "f", lazy.spawn("kitty --session ranger.session --class floating")),
 ]
+
+lazy.set_wallpaper("~/.config/qtile/wallpapers/wp1.png")
+

@@ -15,7 +15,9 @@ def wifiEmoji():
 
 def clockEmoji():
     now = datetime.datetime.now()
-    h = now.hour % 13
+    h = now.hour
+    if h > 12:
+        h %= 12
     if h == 1:
         return " "
     if h == 2:
@@ -41,52 +43,56 @@ def clockEmoji():
     if h == 12:
         return " "
 
+def has_battery():
+    return psutil.sensors_battery() is not None
+
+
 def batteryEmoji():
-    if hasattr(psutil, "sensors_battery"):
-        battery = psutil.sensors_battery() 
-        is_plugged = battery.power_plugged
-        remaining = round(battery.percent)
-        if is_plugged:
-            if remaining == 100:
-                return " "
-            if remaining >= 90:
-                return " "
-            if remaining >= 80:
-                return " "
-            if remaining >= 60:
-                return " "
-            if remaining >= 40:
-                return " "
-            if remaining >= 30:
-                return " "
-            else:
-                return " "
+    if not has_battery():
+        return "No battery!"
+    battery = psutil.sensors_battery() 
+    is_plugged = battery.power_plugged
+    remaining = round(battery.percent)
+    if is_plugged:
+        if remaining == 100:
+            return " "
+        if remaining >= 90:
+            return " "
+        if remaining >= 80:
+            return " "
+        if remaining >= 60:
+            return " "
+        if remaining >= 40:
+            return " "
+        if remaining >= 30:
+            return " "
         else:
-            if remaining == 100:
-                return ""
-            if remaining >= 90:
-                return ""
-            if remaining >= 80:
-                return ""
-            if remaining >= 70:
-                return ""
-            if remaining >= 60:
-                return ""
-            if remaining >= 50:
-                return ""
-            if remaining >= 40:
-                return ""
-            if remaining >= 30:
-                return ""
-            if remaining >= 20:
-                return ""
-            if remaining >= 10:
-                return ""
-            else:
-                return "!"
+            return " "
+    else:
+        if remaining == 100:
+            return ""
+        if remaining >= 90:
+            return ""
+        if remaining >= 80:
+            return ""
+        if remaining >= 70:
+            return ""
+        if remaining >= 60:
+            return ""
+        if remaining >= 50:
+            return ""
+        if remaining >= 40:
+            return ""
+        if remaining >= 30:
+            return ""
+        if remaining >= 20:
+            return ""
+        if remaining >= 10:
+            return ""
+        else:
+            return "!"
 
 
-    return
 
 class VolumeText(ThreadPoolText):
     defaults = [
@@ -135,4 +141,19 @@ colors = {
     "white": "a4a1a1",
     "bright-white": "f7f7f7"
 }
+
+wp_dir = "~/.config/qtile/wallpapers/"
+"~/.config/qtile/wallpapers/"
+wallpapers = []
+for i in range(1, 8):
+    wallpapers.append(wp_dir + "wp" + str(i) + ".png")
+print(wallpapers)
+current_wallpaper=0
+
+
+def cycle_wallpaper():
+    global current_wallpaper
+    current_wallpaper += 1
+    current_wallpaper %= len(wallpapers)
+    return wallpapers[current_wallpaper]
 
