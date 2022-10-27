@@ -1,10 +1,8 @@
 from libqtile.config import Group
 from keys import *
-
+from util import *
 
 groups = [Group(i) for i in "αβγδε"]
-
-
 
 for i in range(len(groups)):
     keys.extend(
