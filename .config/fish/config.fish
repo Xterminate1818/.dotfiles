@@ -17,6 +17,8 @@ function fish_prompt
 end
 
 alias lf ranger
+alias cls clear
 
 set -x EDITOR nvim
 set -x VISUAL nvim
+set fish_cursor_insert line
