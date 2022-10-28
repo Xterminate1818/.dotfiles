@@ -142,18 +142,4 @@ colors = {
     "bright-white": "f7f7f7"
 }
 
-wp_dir = "~/.config/qtile/wallpapers/"
-"~/.config/qtile/wallpapers/"
-wallpapers = []
-for i in range(1, 8):
-    wallpapers.append(wp_dir + "wp" + str(i) + ".png")
-print(wallpapers)
-current_wallpaper=0
-
-
-def cycle_wallpaper():
-    global current_wallpaper
-    current_wallpaper += 1
-    current_wallpaper %= len(wallpapers)
-    return wallpapers[current_wallpaper]
 
