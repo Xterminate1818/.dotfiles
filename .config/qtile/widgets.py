@@ -6,6 +6,7 @@ from util import *
 
 widget_defaults = dict(
     font="Cascadia Mono",
+    #font="CaskaydiaCove",
     fontsize=18,
     padding=0,
     foreground_color=colors["bright-white"]
@@ -15,10 +16,10 @@ extension_defaults = widget_defaults.copy()
 backing_color = colors["grey"]
 
 def opener():
-    return widget.TextBox("", font="3270Medium Nerd Font Mono", fontsize=48, foreground=backing_color)
+    return widget.TextBox("", fontsize=48, foreground=backing_color)
 
 def closer():
-    return widget.TextBox("", font="3270Medium Nerd Font Mono", fontsize=48, foreground=backing_color)
+    return widget.TextBox("", fontsize=48, foreground=backing_color)
 
 
 
@@ -47,6 +48,8 @@ my_widgets = [
     widget.Clock(format="%H:%M:%S", background=backing_color),
     closer(),
     widget.Spacer(length=bar.STRETCH),
+    widget.Systray(),
+    widget.Spacer(length=15),
     opener(),
     VolumeText(background=backing_color, fontsize=25),
     widget.TextBox(" ", background=backing_color),

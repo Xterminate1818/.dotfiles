@@ -32,5 +32,4 @@ keys = [
     Key([mod], "f", lazy.spawn("kitty --session /home/logan/.config/kitty/ranger.session --class floating")),
 ]
 
-lazy.set_wallpaper("~/.config/qtile/wallpapers/wp1.png")
 
