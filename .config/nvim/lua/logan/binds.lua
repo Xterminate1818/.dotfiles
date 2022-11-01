@@ -16,8 +16,8 @@ end
 amap("<F1>", "<Nop>")
 amap("<F2>", "<Nop>")
 amap("<F3>", "<Nop>")
-amap("<F4>", "<Nop>")
-amap("<F5>", "<Nop>")
+-- amap("<F4>", "<Nop>")
+-- amap("<F5>", "<Nop>")
 amap("<F6>", "<Nop>")
 amap("<F7>", "<Nop>")
 amap("<F8>", "<Nop>")
@@ -76,6 +76,9 @@ nmap("gd", ":lua vim.lsp.buf.definition()<cr>")
 nmap("gI", ":lua vim.lsp.buf.implementation()<cr>")
 nmap("<leader>w", ":lua vim.lsp.buf.hover()<cr>")
 
+-- Craft bindings
+nmap("<F4>", ":!craft debug<cr>")
+nmap("<F5>", ":!craft -run<cr>")
 
 
 ---- Insert
