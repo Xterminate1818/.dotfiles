@@ -28,7 +28,10 @@ require("null-ls").setup({
     require("null-ls").builtins.hover.printenv,
     require("null-ls").builtins.diagnostics.fish,
     require("null-ls").builtins.formatting.fish_indent,
-    require("null-ls").builtins.diagnostics.fish
+    require("null-ls").builtins.diagnostics.fish,
+    -- Javascript
+    require("null-ls").builtins.diagnostics.jshint,
+    require("null-ls").builtins.diagnostics.semistandardjs,
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then

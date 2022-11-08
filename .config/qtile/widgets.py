@@ -2,7 +2,8 @@ from libqtile import bar, widget
 from datetime import datetime
 import psutil
 from util import *
-
+from libqtile.config import Key
+from libqtile.lazy import lazy
 
 widget_defaults = dict(
     font="Cascadia Mono",
@@ -57,7 +58,9 @@ my_widgets = [
     closer(),
     widget.Spacer(length=5),
     opener(),
-    widget.GenPollText(func=wifiEmoji, background=backing_color, update_interval=15),
+    widget.GenPollText(func=wifiEmoji, background=backing_color, 
+                       update_interval=15, 
+                       mouse_callbacks={"Button1": lazy.spawn("kitty --class floating --session /home/logan/.config/kitty/nmtui.session")}),
     closer(),
     widget.Spacer(length=5),
     ]
