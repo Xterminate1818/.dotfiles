@@ -1,20 +1,19 @@
-local null_ls = require("null-ls")
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-require("plenary.curl")
+require "plenary.curl"
 
-require("null-ls").setup({
+require("null-ls").setup {
   sources = {
     -- General
     require("null-ls").builtins.formatting.stylua,
     require("null-ls").builtins.diagnostics.eslint,
     require("null-ls").builtins.completion.spell,
-    require("null-ls").builtins.hover.dictionary.with({
-      filetypes = {}
-    }),
+    require("null-ls").builtins.hover.dictionary.with {
+      filetypes = {},
+    },
     -- C/C++
-    require("null-ls").builtins.formatting.clang_format.with({
-      command = "clang-format --style=Google --Werror"
-    }),
+    require("null-ls").builtins.formatting.clang_format.with {
+      command = "clang-format --style=Google --Werror",
+    },
     -- GD Script
     require("null-ls").builtins.diagnostics.gdlint,
     -- Python
@@ -30,12 +29,14 @@ require("null-ls").setup({
     require("null-ls").builtins.formatting.fish_indent,
     require("null-ls").builtins.diagnostics.fish,
     -- Javascript
-    require("null-ls").builtins.diagnostics.jshint,
-    require("null-ls").builtins.diagnostics.semistandardjs,
+    require("null-ls").builtins.formatting.tidy,
+    require("null-ls").builtins.formatting.prettierd,
+    -- Rust
+    require("null-ls").builtins.formatting.rustfmt,
   },
   on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    if client.supports_method "textDocument/formatting" then
+      vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = augroup,
         buffer = bufnr,
@@ -48,5 +49,4 @@ require("null-ls").setup({
       })
     end
   end,
-
-})
+}

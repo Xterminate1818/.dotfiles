@@ -1,15 +1,18 @@
-local configs = require("nvim-treesitter.configs")
+local configs = require "nvim-treesitter.configs"
 configs.setup {
   ensure_installed = "all",
-  sync_install = false, 
+  sync_install = false,
   ignore_install = { "" }, -- List of parsers to ignore installing
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = { "" }, -- list of language that will be disabled
     additional_vim_regex_highlighting = true,
-
   },
   indent = { enable = true, disable = { "yaml" } },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+  },
   rainbow = {
     enable = true,
     -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
@@ -20,25 +23,29 @@ configs.setup {
   },
 }
 
-local npairs = require("nvim-autopairs")
-local Rule = require('nvim-autopairs.rule')
+local npairs = require "nvim-autopairs"
+local Rule = require "nvim-autopairs.rule"
 
-npairs.setup({
-    check_ts = true,
-    ts_config = {
-        lua = {'string'},-- it will not add a pair on that treesitter node
-        javascript = {'template_string'},
-        java = false,-- don't check treesitter on java
-    }
-})
+npairs.setup {
+  check_ts = true,
+  ts_config = {
+    lua = { "string" }, -- it will not add a pair on that treesitter node
+    javascript = { "template_string" },
+    java = false, -- don't check treesitter on java
+  },
+}
 
-local ts_conds = require('nvim-autopairs.ts-conds')
+local ts_conds = require "nvim-autopairs.ts-conds"
 
 -- press % => %% only while inside a comment or string
-npairs.add_rules({
-  Rule("%", "%", "lua")
-    :with_pair(ts_conds.is_ts_node({'string','comment'})),
-  Rule("$", "$", "lua")
-    :with_pair(ts_conds.is_not_ts_node({'function'}))
-})
+npairs.add_rules {
+  Rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node { "string", "comment" }),
+  Rule("$", "$", "lua"):with_pair(ts_conds.is_not_ts_node { "function" }),
+}
 
+-- Autopairs
+require("nvim-treesitter.configs").setup {
+  autotag = {
+    enable = true,
+  },
+}

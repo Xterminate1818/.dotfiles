@@ -1,4 +1,4 @@
-require("logan.options")
+require "logan.options"
 require "logan.binds"
 require "logan.plugins"
 require "logan.nvim-tree"
@@ -9,4 +9,5 @@ require "logan.treesitter"
 require "logan.gitsigns"
 require "logan.etc"
 require "logan.colorshceme"
---vim.cmd "colorscheme system76"
+require "logan.toggleterm"
+pcall(dofile, "./local.lua")

@@ -2,9 +2,7 @@ local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 
-function map(mode, input, output)
-  keymap(mode, input, output, opts)
-end
+function map(mode, input, output) keymap(mode, input, output, opts) end
 
 function amap(input, output)
   keymap("n", input, output, opts)
@@ -16,8 +14,8 @@ end
 amap("<F1>", "<Nop>")
 amap("<F2>", "<Nop>")
 amap("<F3>", "<Nop>")
--- amap("<F4>", "<Nop>")
--- amap("<F5>", "<Nop>")
+amap("<F4>", "<Nop>")
+amap("<F5>", "<Nop>")
 amap("<F6>", "<Nop>")
 amap("<F7>", "<Nop>")
 amap("<F8>", "<Nop>")
@@ -26,8 +24,6 @@ amap("<F10>", "<Nop>")
 amap("<F11>", "<Nop>")
 amap("<F12>", "<Nop>")
 
-
-
 -- Leader key
 map("", "<space>", "<Nop>")
 vim.g.mapleader = " "
@@ -35,9 +31,7 @@ vim.g.maplocalleader = " "
 
 ---- Normal
 
-function nmap(input, output)
-  map('n', input, output)
-end
+function nmap(input, output) map("n", input, output) end
 
 -- Resize with arrows
 nmap("<C-Up>", ":resize +2<CR>")
@@ -55,18 +49,28 @@ nmap("<C-l>", "<C-w>l")
 nmap("<S-j>", ":bnext<CR>")
 nmap("<S-k>", ":bprevious<CR>")
 
+-- Close current buffer
+nmap("<leader>c", ":bd<cr>")
+
 -- Telescope
-keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown())<cr>"
-  , opts)
+keymap(
+  "n",
+  "<leader>f",
+  "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown())<cr>",
+  opts
+)
 keymap("n", "<leader>g", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<leader>lD", "<cmd>Telescope diagnostics<cr>", opts)
 
 -- NvimTree
 nmap("<leader>e", ":NvimTreeToggle<cr>")
 
 -- Lsp stuff
 nmap("gl", ':lua vim.diagnostic.open_float({scope="line", border="none", prefix="", header="", source=false})<cr>')
-nmap("<leader>lD",
-  ':lua vim.diagnostic.open_float({scope="buffer", border="none", prefix="", header="", source=false})<cr>')
+nmap(
+  "<leader>lD",
+  ':lua vim.diagnostic.open_float({scope="buffer", border="none", prefix="", header="", source=false})<cr>'
+)
 nmap("<leader>la", ":lua vim.lsp.buf.code_action()<cr>")
 nmap("<leader>lh", ":lua vim.lsp.buf.signature_help()<cr>")
 nmap("<leader>lr", ":lua vim.lsp.buf.rename()<cr>")
@@ -77,9 +81,11 @@ nmap("gI", ":lua vim.lsp.buf.implementation()<cr>")
 nmap("<leader>w", ":lua vim.lsp.buf.hover()<cr>")
 
 -- Craft bindings
-nmap("<F4>", ":!craft debug<cr>")
-nmap("<F5>", ":!craft -run<cr>")
+--nmap("<F4>", ":!craft debug<cr>")
+--nmap("<F5>", ":!craft -run<cr>")
 
+-- Node js terminal
+nmap("<C-n>", ":lua _NODE_TOGGLE()<cr>")
 
 ---- Insert
 -- Escape sequence

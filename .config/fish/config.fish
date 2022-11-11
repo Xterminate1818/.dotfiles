@@ -11,7 +11,7 @@ end
 function fish_prompt
 
     set -l uwu (set_color brwhite)"( owo)"
-    set -l who (set_color red)"["$USER"@"$hostname]
+    set -l who (set_color brred)"["$USER"@"$hostname]
     set -l path (set_color brred)(prompt_pwd)(set_color normal)
     printf "%s %s %s > " $uwu $who $path
 end
