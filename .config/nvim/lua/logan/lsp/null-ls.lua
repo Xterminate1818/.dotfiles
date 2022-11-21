@@ -5,29 +5,28 @@ require("null-ls").setup {
   sources = {
     -- General
     require("null-ls").builtins.formatting.stylua,
-    require("null-ls").builtins.diagnostics.eslint,
-    require("null-ls").builtins.completion.spell,
-    require("null-ls").builtins.hover.dictionary.with {
-      filetypes = {},
-    },
+    -- require("null-ls").builtins.diagnostics.eslint,
+    --require("null-ls").builtins.completion.spell,
+    --require("null-ls").builtins.hover.dictionary.with {
+    -- filetypes = {},
+    -- },
     -- C/C++
     require("null-ls").builtins.formatting.clang_format.with {
       command = "clang-format --style=Google --Werror",
     },
     -- GD Script
-    require("null-ls").builtins.diagnostics.gdlint,
+    -- require("null-ls").builtins.diagnostics.gdlint,
     -- Python
-    require("null-ls").builtins.diagnostics.pylint,
-    require("null-ls").builtins.formatting.isort,
+    --require("null-ls").builtins.diagnostics.pylint,
+    -- require("null-ls").builtins.formatting.isort,
     require("null-ls").builtins.formatting.black,
-    require("null-ls").builtins.formatting.autopep8,
-    require("null-ls").builtins.diagnostics.flake8,
-    require("null-ls").builtins.diagnostics.pycodestyle,
+    --require("null-ls").builtins.formatting.autopep8,
+    --require("null-ls").builtins.diagnostics.flake8,
+    --require("null-ls").builtins.diagnostics.pycodestyle,
     -- Shell
     require("null-ls").builtins.hover.printenv,
     require("null-ls").builtins.diagnostics.fish,
     require("null-ls").builtins.formatting.fish_indent,
-    require("null-ls").builtins.diagnostics.fish,
     -- Javascript
     require("null-ls").builtins.formatting.tidy,
     require("null-ls").builtins.formatting.prettierd,

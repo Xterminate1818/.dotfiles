@@ -11,3 +11,4 @@ require "logan.etc"
 require "logan.colorshceme"
 require "logan.toggleterm"
 pcall(dofile, "./local.lua")
+pcall(dofile, "../local.lua")

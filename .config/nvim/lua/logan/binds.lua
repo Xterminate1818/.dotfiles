@@ -13,7 +13,7 @@ end
 -- Disable f keys
 amap("<F1>", "<Nop>")
 amap("<F2>", "<Nop>")
-amap("<F3>", "<Nop>")
+--amap("<F3>", "<Nop>")
 amap("<F4>", "<Nop>")
 amap("<F5>", "<Nop>")
 amap("<F6>", "<Nop>")
@@ -32,6 +32,9 @@ vim.g.maplocalleader = " "
 ---- Normal
 
 function nmap(input, output) map("n", input, output) end
+
+-- Copy buffer to clipboard
+nmap("<F3>", ":%y+<cr>")
 
 -- Resize with arrows
 nmap("<C-Up>", ":resize +2<CR>")
@@ -79,13 +82,11 @@ nmap("gT", ":lua vim.lsp.buf.type_definition()<cr>")
 nmap("gd", ":lua vim.lsp.buf.definition()<cr>")
 nmap("gI", ":lua vim.lsp.buf.implementation()<cr>")
 nmap("<leader>w", ":lua vim.lsp.buf.hover()<cr>")
+    --nmap("<F4>", ":!craft debug<cr>")
+    --nmap("<F5>", ":!craft -run<cr>")
 
--- Craft bindings
---nmap("<F4>", ":!craft debug<cr>")
---nmap("<F5>", ":!craft -run<cr>")
-
--- Node js terminal
-nmap("<C-n>", ":lua _NODE_TOGGLE()<cr>")
+    -- Node js terminal
+    nmap("<C-n>", ":lua _NODE_TOGGLE()<cr>")
 
 ---- Insert
 -- Escape sequence
