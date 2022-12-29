@@ -35,6 +35,8 @@ packer.init {
 
 plugin_list = {
   "wbthomason/packer.nvim",
+  -- Profiling
+  "lewis6991/impatient.nvim",
   -- Used by others
   "nvim-lua/popup.nvim",
   "nvim-lua/plenary.nvim",
@@ -84,6 +86,16 @@ plugin_list = {
   -- Terminal
   "akinsho/toggleterm.nvim",
   "nvim-lualine/lualine.nvim",
+  -- Startup screen
+  { "goolord/alpha-nvim", config = function() require("alpha").setup(require("alpha.themes.startify").config) end },
+  -- Rust
+  {
+    "saecki/crates.nvim",
+    tag = "v0.3.0",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = function() require("crates").setup() end,
+  },
+  "simrat39/rust-tools.nvim",
 }
 
 -- Install your plugins here

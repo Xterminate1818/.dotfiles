@@ -11,16 +11,10 @@ function fish_mode_prompt
 
 end
 
-function fish_prompt
-
-    set -l uwu (set_color brwhite)"( owo)"
-    set -l who (set_color brgreen)$USER"@"$hostname
-    set -l path (set_color brgreen)(prompt_pwd)(set_color normal)
-    printf "%s %s %s > " $uwu $who $path
-end
 
 alias lf ranger
 alias cls clear
+alias nv nvim
 
 set -x EDITOR nvim
 set -x VISUAL nvim

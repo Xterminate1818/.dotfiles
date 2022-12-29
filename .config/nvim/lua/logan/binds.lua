@@ -24,6 +24,10 @@ amap("<F10>", "<Nop>")
 amap("<F11>", "<Nop>")
 amap("<F12>", "<Nop>")
 
+-- Forece quit
+amap("<c-q>", "<cmd>qall!<cr>")
+amap("<c-s>", "<cmd>w<cr>")
+
 -- Leader key
 map("", "<space>", "<Nop>")
 vim.g.mapleader = " "
@@ -47,6 +51,8 @@ nmap("<C-h>", "<C-w>h")
 nmap("<C-j>", "<C-w>j")
 nmap("<C-k>", "<C-w>k")
 nmap("<C-l>", "<C-w>l")
+nmap("<S-h", "<C-w>h")
+nmap("<S-l", "<C-w>l")
 
 -- Navigate buffers
 nmap("<S-j>", ":bnext<CR>")
@@ -82,15 +88,18 @@ nmap("gT", ":lua vim.lsp.buf.type_definition()<cr>")
 nmap("gd", ":lua vim.lsp.buf.definition()<cr>")
 nmap("gI", ":lua vim.lsp.buf.implementation()<cr>")
 nmap("<leader>w", ":lua vim.lsp.buf.hover()<cr>")
-    --nmap("<F4>", ":!craft debug<cr>")
-    --nmap("<F5>", ":!craft -run<cr>")
+--nmap("<F4>", ":!craft debug<cr>")
+--nmap("<F5>", ":!craft -run<cr>")
 
-    -- Node js terminal
-    nmap("<C-n>", ":lua _NODE_TOGGLE()<cr>")
+-- Node js terminal
+nmap("<C-n>", ":lua _NODE_TOGGLE()<cr>")
 
 ---- Insert
 -- Escape sequence
 keymap("i", "jk", "<ESC>", opts)
+
+-- CPP pointer deref shortcut
+keymap("i", "<C-.>", "->", opts)
 
 ---- Visual
 -- Stay in indent mode

@@ -1,6 +1,8 @@
+require("impatient").enable_profile()
 require "logan.options"
 require "logan.binds"
 require "logan.plugins"
+require "logan.rust"
 require "logan.nvim-tree"
 require "logan.cmp"
 require "logan.lsp"

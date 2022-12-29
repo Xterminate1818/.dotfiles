@@ -11,11 +11,10 @@ require("null-ls").setup {
     -- filetypes = {},
     -- },
     -- C/C++
-    require("null-ls").builtins.formatting.clang_format.with {
-      command = "clang-format --style=Google --Werror",
-    },
+    require("null-ls").builtins.diagnostics.clang_check,
+    require("null-ls").builtins.formatting.clang_format,
     -- GD Script
-    -- require("null-ls").builtins.diagnostics.gdlint,
+    require("null-ls").builtins.diagnostics.gdlint,
     -- Python
     --require("null-ls").builtins.diagnostics.pylint,
     -- require("null-ls").builtins.formatting.isort,
