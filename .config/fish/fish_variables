@@ -10,9 +10,13 @@ SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ejorgebucaran/nvm\x2efish\x1ejorge
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR _hydro_git_11126:main\u2022\x20
 SETUVAR _hydro_git_1274:master\u2022\x20
+SETUVAR _hydro_git_12990:main\u2022\x20
 SETUVAR _hydro_git_17314:\x1d
+SETUVAR _hydro_git_2140:main\u2022\x20
 SETUVAR _hydro_git_27746:master\u2022\x20
+SETUVAR _hydro_git_2955:\x1d
 SETUVAR _hydro_git_29629:main\u2022\x20
+SETUVAR _hydro_git_663:main\u2022\x20
 SETUVAR _tide_left_items:\x1d
 SETUVAR _tide_prompt_63675:\x1d
 SETUVAR _tide_right_items:\x1d
@@ -46,5 +50,6 @@ SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
 SETUVAR fish_pager_color_selected_background:\x2dr
+SETUVAR fish_user_paths:/home/logan/\x2elocal/bin
 SETUVAR nvm_data:/home/logan/\x2elocal/share/nvm
 SETUVAR nvm_mirror:https\x3a//nodejs\x2eorg/dist

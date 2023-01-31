@@ -4,14 +4,16 @@ import alsaaudio
 import psutil
 from libqtile.widget.base import ThreadPoolText
 
-def wifiEmoji():
-    interface_name="wlan0"
+
+def wifiLevel():
+    interface_name = "wlan0"
     interface = iwlib.get_iwconfig(interface_name)
     if "stats" not in interface:
-        return "睊 D/C"
+        return "D/C"
     quality = (interface["stats"]["quality"]) / 70.0 * 100
     quality = round(quality)
-    return "直 " + str(quality) + "%"
+    return "WIFI=" + str(quality) + "%"
+
 
 def clockEmoji():
     now = datetime.datetime.now()
@@ -22,7 +24,7 @@ def clockEmoji():
         return " "
     if h == 2:
         return " "
-    if h == 3: 
+    if h == 3:
         return " "
     if h == 4:
         return " "
@@ -43,6 +45,7 @@ def clockEmoji():
     if h == 12:
         return " "
 
+
 def has_battery():
     return psutil.sensors_battery() is not None
 
@@ -50,7 +53,7 @@ def has_battery():
 def batteryEmoji():
     if not has_battery():
         return "No battery!"
-    battery = psutil.sensors_battery() 
+    battery = psutil.sensors_battery()
     is_plugged = battery.power_plugged
     remaining = round(battery.percent)
     if is_plugged:
@@ -91,7 +94,6 @@ def batteryEmoji():
             return ""
         else:
             return "!"
-
 
 
 class VolumeText(ThreadPoolText):
@@ -139,7 +141,5 @@ colors = {
     "yellow": "b5e4f4",
     "light-yellow": "ccab53",
     "white": "a4a1a1",
-    "bright-white": "f7f7f7"
+    "bright-white": "f7f7f7",
 }
-
-

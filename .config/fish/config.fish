@@ -1,4 +1,4 @@
-set -x PATH "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:~/.local/bin:~/.cargo/bin:."
+#set -x PATH "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:."
 fish_add_path ~/.cargo/bin
 fish_add_path ~/.local/bin
 

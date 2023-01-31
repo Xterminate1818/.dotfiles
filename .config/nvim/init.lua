@@ -1,4 +1,4 @@
-require("impatient").enable_profile()
+--require("impatient").enable_profile()
 require "logan.options"
 require "logan.binds"
 require "logan.plugins"
