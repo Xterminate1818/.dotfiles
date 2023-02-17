@@ -1,4 +1,4 @@
---require("impatient").enable_profile()
+require("impatient").enable_profile()
 require "logan.options"
 require "logan.binds"
 require "logan.plugins"
@@ -13,4 +13,4 @@ require "logan.etc"
 require "logan.colorshceme"
 require "logan.toggleterm"
 pcall(dofile, "./local.lua")
-pcall(dofile, "../local.lua")
+--pcall(dofile, "../local.lua")

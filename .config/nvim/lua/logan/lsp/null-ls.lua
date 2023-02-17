@@ -14,7 +14,7 @@ require("null-ls").setup {
     require("null-ls").builtins.diagnostics.clang_check,
     require("null-ls").builtins.formatting.clang_format,
     -- GD Script
-    require("null-ls").builtins.diagnostics.gdlint,
+    --require("null-ls").builtins.diagnostics.gdlint,
     -- Python
     --require("null-ls").builtins.diagnostics.pylint,
     -- require("null-ls").builtins.formatting.isort,
@@ -25,12 +25,12 @@ require("null-ls").setup {
     -- Shell
     require("null-ls").builtins.hover.printenv,
     require("null-ls").builtins.diagnostics.fish,
-    require("null-ls").builtins.formatting.fish_indent,
+    --require("null-ls").builtins.formatting.fish_indent,
     -- Javascript
-    require("null-ls").builtins.formatting.tidy,
-    require("null-ls").builtins.formatting.prettierd,
+    --require("null-ls").builtins.formatting.tidy,
+    --require("null-ls").builtins.formatting.prettierd,
     -- Rust
-    require("null-ls").builtins.formatting.rustfmt,
+    --require("null-ls").builtins.formatting.rustfmt,
   },
   on_attach = function(client, bufnr)
     if client.supports_method "textDocument/formatting" then

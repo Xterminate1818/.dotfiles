@@ -1,10 +1,10 @@
 local root_files = {
-  '.clangd',
-  '.clang-tidy',
-  '.clang-format',
-  'compile_commands.json',
-  'compile_flags.txt',
-  'configure.ac', -- AutoTools
+  ".clangd",
+  ".clang-tidy",
+  ".clang-format",
+  "compile_commands.json",
+  "compile_flags.txt",
+  "configure.ac", -- AutoTools
 }
 
 local default_capabilities = {
@@ -13,13 +13,13 @@ local default_capabilities = {
       editsNearCursor = true,
     },
   },
-  offsetEncoding = { 'utf-8', 'utf-16' },
+  offsetEncoding = { "utf-8" },
 }
 
 return {
   default_config = {
-    cmd = { 'clangd' },
-    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
+    cmd = { "clangd" },
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
     single_file_support = true,
     capabilities = default_capabilities,
   },
