@@ -6,7 +6,7 @@ from libqtile.config import Key
 from libqtile.lazy import lazy
 
 widget_defaults = dict(
-    font="BigBlue_Terminal_437TT Nerd Font Mono",
+    font="Cascadia Code",
     fontsize=18,
     padding=0,
     foreground_color=colors["bright-white"],
