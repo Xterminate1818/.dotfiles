@@ -51,6 +51,8 @@ plugin_list = {
   "saadparwaiz1/cmp_luasnip",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-nvim-lua",
+  -- Signature help
+  "ray-x/lsp_signature.nvim",
   -- Snippets
   "L3MON4D3/LuaSnip",
   "rafamadriz/friendly-snippets",
@@ -61,6 +63,10 @@ plugin_list = {
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
   "williamboman/nvim-lsp-installer",
+  "folke/neodev.nvim",
+  -- DAP
+  "mfussenegger/nvim-dap",
+  "rcarriga/nvim-dap-ui",
   -- Telescope
   "nvim-telescope/telescope.nvim",
   "nvim-telescope/telescope-fzy-native.nvim",
@@ -75,7 +81,11 @@ plugin_list = {
   -- NvimTree
   { "nvim-tree/nvim-tree.lua", requires = { "nvim-tree/nvim-web-devicons" }, tag = "nightly" },
   -- Bufferline
-  { "akinsho/bufferline.nvim", tag = "v3.*", requires = "kyazdani42/nvim-web-devicons" },
+  {
+    "akinsho/bufferline.nvim",
+    tag = "v3.*",
+    requires = "kyazdani42/nvim-web-devicons",
+  },
   -- null-ls
   "jose-elias-alvarez/null-ls.nvim",
   -- Theme

@@ -98,9 +98,6 @@ nmap("<C-n>", ":lua _NODE_TOGGLE()<cr>")
 -- Escape sequence
 keymap("i", "jk", "<ESC>", opts)
 
--- CPP pointer deref shortcut
-keymap("i", "<C-.>", "->", opts)
-
 ---- Visual
 -- Stay in indent mode
 map("v", "<", "<gv")
@@ -110,3 +107,6 @@ map("v", ">", ">gv")
 map("v", "<A-j>", ":m .+1<CR>==")
 map("v", "<A-k>", ":m .-2<CR>==")
 map("v", "p", '"_dP')
+
+-- DAP UI
+nmap("<leader>db", "lua require'dap'.continue()<cr>")

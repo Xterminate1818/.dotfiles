@@ -16,7 +16,7 @@ require("null-ls").setup {
     -- GD Script
     --require("null-ls").builtins.diagnostics.gdlint,
     -- Python
-    --require("null-ls").builtins.diagnostics.pylint,
+    require("null-ls").builtins.diagnostics.pylint,
     -- require("null-ls").builtins.formatting.isort,
     require("null-ls").builtins.formatting.black,
     --require("null-ls").builtins.formatting.autopep8,
@@ -30,7 +30,21 @@ require("null-ls").setup {
     --require("null-ls").builtins.formatting.tidy,
     --require("null-ls").builtins.formatting.prettierd,
     -- Rust
-    --require("null-ls").builtins.formatting.rustfmt,
+    require("null-ls").builtins.formatting.rustfmt.with {
+      extra_args = function(params)
+        local Path = require "plenary.path"
+        local cargo_toml = Path:new(params.root .. "/" .. "Cargo.toml")
+
+        if cargo_toml:exists() and cargo_toml:is_file() then
+          for _, line in ipairs(cargo_toml:readlines()) do
+            local edition = line:match [[^edition%s*=%s*%"(%d+)%"]]
+            if edition then return { "--edition=" .. edition } end
+          end
+        end
+        -- default edition when we don't find `Cargo.toml` or the `edition` in it.
+        return { "--edition=2021" }
+      end,
+    },
   },
   on_attach = function(client, bufnr)
     if client.supports_method "textDocument/formatting" then
