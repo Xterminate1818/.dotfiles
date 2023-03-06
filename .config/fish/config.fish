@@ -24,6 +24,3 @@ set -x EDITOR lvim
 set -x VISUAL lvim
 set fish_cursor_insert line
 
-set -x XDG_RUNTIME_DIR /tmp/1000
-mkdir -p $XDG_RUNTIME_DIR
-chmod 0700 $XDG_RUNTIME_DIR
