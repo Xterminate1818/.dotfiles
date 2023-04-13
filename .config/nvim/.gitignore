@@ -1,5 +1,5 @@
 # neovim
-lua/
+plugin/
 profile.json
 
 # cli
