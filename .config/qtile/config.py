@@ -3,6 +3,12 @@ from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile import layout
+from libqtile import qtile
+from libqtile.backend.wayland.inputs import InputConfig
+
+wl_input_rules = {
+    "*": InputConfig(left_handed=True, pointer_accel=0.0, accel_profile='flat')
+}
 
 # Initial setup
 HAS_BATTERY = False
