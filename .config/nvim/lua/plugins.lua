@@ -34,7 +34,6 @@ return require('packer').startup(function(use)
   -- file tree
   use {
     'nvim-tree/nvim-tree.lua',
-    config = tree_setup()
   }
   use 'nvim-tree/nvim-web-devicons'
   -- colorscheme
@@ -45,17 +44,17 @@ return require('packer').startup(function(use)
     end
   }
   -- completion
-  use { 'hrsh7th/nvim-cmp', config = cmp_setup() }
+  use { 'hrsh7th/nvim-cmp' }
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-path'
   use 'smolck/command-completion.nvim'
-  use { 'windwp/nvim-autopairs', config = autopairs_setup() }
+  use { 'windwp/nvim-autopairs' }
   use { "ray-x/lsp_signature.nvim", config = require("lsp_signature").setup({
     floating_window = false,
     hint_prefix = "",
   }) }
   -- telescope
-  use { 'nvim-telescope/telescope.nvim', tag = '0.1.1', config = telescope_setup() }
+  use { 'nvim-telescope/telescope.nvim', tag = '0.1.1' }
   use 'nvim-telescope/telescope-ui-select.nvim'
   use { 'nvim-telescope/telescope-fzf-native.nvim', run =
   'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
@@ -64,9 +63,6 @@ return require('packer').startup(function(use)
   -- bufferline
   use({
     'willothy/nvim-cokeline',
-    config = function()
-      bufline_setup()
-    end
   })
 
   if packer_bootstrap then
