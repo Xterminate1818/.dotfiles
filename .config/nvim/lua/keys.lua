@@ -36,7 +36,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 ---- Normal
-
 function nmap(input, output) map("n", input, output) end
 
 -- Save buffer
@@ -59,7 +58,7 @@ nmap("<S-h>", "<Plug>(cokeline-focus-prev)")
 nmap("<S-l>", "<Plug>(cokeline-focus-next)")
 
 -- Run
-nmap("<leader>rr", ":!cargo run<cr>")
+nmap("<leader>rr", ':TermExec cmd="cargo run"<cr>')
 
 -- Close current buffer
 nmap("<leader>c", ":bd<cr>")

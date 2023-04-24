@@ -19,6 +19,7 @@ vim.cmd([[
   augroup end
 ]])
 
+
 -- Setups
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -29,6 +30,10 @@ return require('packer').startup(function(use)
   use 'nvim-lua/plenary.nvim'
   -- rust
   use { 'saecki/crates.nvim', config = require('crates').setup(), }
+  -- toggleterm
+  use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+    require("toggleterm").setup()
+  end }
   -- treesitter
   use 'nvim-treesitter/nvim-treesitter'
   -- file tree
@@ -59,7 +64,12 @@ return require('packer').startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run =
   'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
   -- commenting
-  use { "terrortylor/nvim-comment", config = require('nvim_comment').setup() }
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  }
   -- bufferline
   use({
     'willothy/nvim-cokeline',
