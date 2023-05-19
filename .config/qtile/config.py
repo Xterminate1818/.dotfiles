@@ -47,7 +47,7 @@ def wifiLevel():
     quality = (interface["stats"]["quality"]) / 70.0 * 100.0
     quality = round(quality)
     return "WIFI=" + str(quality) + "%"
-
+# SCALE = 1
 
 # GENERAL CONFIG
 mod = "mod1"

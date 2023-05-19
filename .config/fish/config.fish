@@ -17,13 +17,15 @@ end
 alias lf ranger
 alias cls clear
 alias nv nvim
+alias glsl glslangValidator 
 alias lg lazygit
 alias cdu "cd .."
+alias jplc "LC_ALL=ja_JP"
 alias jpwine "LC_ALL=ja_JP wine"
 alias logout "kill -9 -1"
 
 set -x DRI_PRIME 1
-set -x RUST_BACKTRACE 1
+#set -x RUST_BACKTRACE 1
 set -x EDITOR lvim
 set -x VISUAL lvim
 set -x XDG_CONFIG_HOME ~/.config

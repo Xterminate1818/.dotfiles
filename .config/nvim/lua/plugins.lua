@@ -28,12 +28,13 @@ vim.g.loaded_netrwPlugin = 1
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'nvim-lua/plenary.nvim'
+  -- lsp
+  use 'neovim/nvim-lspconfig'
   -- rust
   use { 'saecki/crates.nvim', config = require('crates').setup(), }
+  use { 'ron-rs/ron.vim' }
   -- toggleterm
-  use { "akinsho/toggleterm.nvim", tag = '*', config = function()
-    require("toggleterm").setup()
-  end }
+  use { "akinsho/toggleterm.nvim", tag = '*' }
   -- treesitter
   use 'nvim-treesitter/nvim-treesitter'
   -- file tree

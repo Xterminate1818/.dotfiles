@@ -1,4 +1,5 @@
 require("plugins")
+require("term")
 require("completion")
 require("options")
 require("keys")
