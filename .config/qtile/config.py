@@ -2,59 +2,25 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from libqtile import layout
-from libqtile import qtile
-from libqtile.backend.wayland.inputs import InputConfig
+from libqtile.widget import base
+import igpu
 
-wl_input_rules = {
-    "*": InputConfig(left_handed=True, pointer_accel=0.0, accel_profile='flat')
-}
-
-# Initial setup
-HAS_BATTERY = False
-try:
-    import psutil
-
-    HAS_BATTERY = psutil.sensors_battery() is not None
-except:
-    print("Missing psutil, assuming no battery!")
-
-try:
-    import iwlib
-except:
-    print("Missing iwlib, cannot get signal strength!")
-
-SCALE = 1
-try:
-    import tkinter as tk
-
-    root = tk.Tk()
-    screen_height = root.winfo_screenheight()
-    SCALE = int(screen_height / 1080)
-    root.destroy()
-except:
-    print("Missing tkinter, assuming 1080p screen!")
-    SCALE = 1
-
-
-def wifiLevel():
-    if iwlib is None:
-        return "WIFI=ERR"
-    interface_name = "wlan0"
-    interface = iwlib.get_iwconfig(interface_name)
-    if "stats" not in interface:
-        return "WIFI=D/C"
-    quality = (interface["stats"]["quality"]) / 70.0 * 100.0
-    quality = round(quality)
-    return "WIFI=" + str(quality) + "%"
-# SCALE = 1
-
-# GENERAL CONFIG
 mod = "mod1"
 terminal = "kitty"
 rofi_command = "rofi -show drun"
 
-# Terminal color scheme
+dgroups_key_binder = None
+dgroups_app_rules = []  # type: list
+follow_mouse_focus = False
+bring_front_click = False
+cursor_warp = False
+
+auto_fullscreen = True
+focus_on_window_activation = "smart"
+reconfigure_screens = True
+auto_minimize = False
+wl_input_rules = None
+wmname = "Qtile"
 
 new_colors = {
     "black": "000000",
@@ -68,35 +34,36 @@ new_colors = {
     "red": "#ec583a",
 }
 
+class GPU(base.ThreadPoolText):
+    defaults = [
+            ("update_interval", 1.0, "Update interval for the GPU widget"),
+            ]
+    def __init__(self, **config):
+        super().__init__("", **config)
+        self.add_defaults(GPU.defaults)
 
-dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
-follow_mouse_focus = False
-bring_front_click = False
-cursor_warp = False
+    def poll(self):
+        variables = dict()
+        device = igpu.get_device(0)
 
-auto_fullscreen = True
-focus_on_window_activation = "smart"
-reconfigure_screens = True
-auto_minimize = True
-wl_input_rules = None
-wmname = "Qtile"
+        variables["name"] = device.name
 
-# MOUSE CONFIG
-mouse = [
-    Drag(
-        [mod],
-        "Button1",
-        lazy.window.set_position_floating(),
-        start=lazy.window.get_position(),
-    ),
-    Drag(
-        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
-    ),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
-]
+        variables["mem_total"] = device.memory.total
+        variables["mem_used"] = device.memory.used
+        variables["mem_unit"] = device.memory.unit
 
-# KEY CONFIG
+        variables["clock"] = device.clocks.graphics
+        variables["clock_max"] = device.clocks.max_graphics
+        variables["clock_percent"] = device.clocks.graphics / device.clocks.max_graphics
+
+        variables["gpu_percent"] = device.utilization.gpu
+        variables["mem_percent"] = device.utilization.memory
+        variables["temp"] = device.utilization.temperature
+
+        return self.format.format(**variables)
+
+
+
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -124,37 +91,98 @@ keys = [
     ),
 ]
 
-# LAYOUT CONFIG
+groups = [Group(i) for i in "123456"]
+
+for i in groups:
+    keys.extend(
+        [
+            Key(
+                [mod],
+                i.name,
+                lazy.group[i.name].toscreen(),
+                desc="Switch to group {}".format(i.name),
+            ),
+            Key(
+                [mod, "shift"],
+                i.name,
+                lazy.window.togroup(i.name, switch_group=True),
+                desc="Switch to & move focused window to group {}".format(i.name),
+            ),
+        ]
+    )
+
 layouts = [
     layout.MonadTall(
         border_focus=new_colors["green"],
         border_normal=new_colors["white2"],
-        border_width=4 * SCALE,
-        margin=5 * SCALE,
+        border_width=4 ,
+        margin=5,
         margin_on_single=0,
         ratio=0.4,
         border_on_single=False,
     ),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
 ]
+
+widget_defaults = dict(
+    font="Cascadia Code PL SemiBold",
+    foreground=new_colors["white1"],
+    background=new_colors["white5"],
+    fontshadow=new_colors["white5"],
+    fontsize=28,
+    padding=2,
+)
+
+extension_defaults = widget_defaults.copy()
+rainbow = ["9f86c0", "5e548e", "231942", "", ""]
+
+
+screens = [
+    Screen(
+        top=bar.Bar(
+            [
+                widget.GroupBox(
+                    borderwith=4,
+                    highlight_method="block",
+                    disable_drag=True,
+                    use_mouse_wheel=False,
+                    inactive=new_colors["white2"],
+                    active=new_colors["white1"],
+                    this_current_screen_border=new_colors["green"],
+                ),
+
+                widget.Systray(icon_size=40, padding=10),
+                widget.WindowName(),
+                widget.Spacer(length=bar.STRETCH),
+                widget.Clock(format="%m/%d"),
+                widget.Spacer(length=10),
+                widget.Clock(format="%H:%M:%S"),
+                widget.Spacer(length=bar.STRETCH),
+                widget.TextBox(text=" GPU ", background=rainbow[0], padding=0),
+                GPU(format="{clock_percent:.0f}% {temp:.0f}°C ", background=rainbow[0], padding=0),
+                widget.TextBox(text=" CPU ", background=rainbow[1], padding=0),
+                widget.CPU(format="{load_percent:.0f}% ", background=rainbow[1], padding=0),
+                widget.ThermalSensor(format="{temp:.0f}{unit} ", background=rainbow[1]),
+                widget.TextBox(text=" MEM ", background=rainbow[2]),
+                widget.Memory(measure_mem='G', format="{MemPercent:.0f}%", background=rainbow[2]),
+            ],
+            48,
+            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+        ),
+    ),
+]
+
+# Drag floating layouts.
+mouse = [
+    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Click([mod], "Button2", lazy.window.bring_to_front()),
+]
+
 floating_layout = layout.Floating(
     border_focus=new_colors["green"],
     border_normal=new_colors["white2"],
-    border_width=4 * SCALE,
-    margin=5 * SCALE,
-    margin_on_single=0,
-    ratio=0.4,
-    border_on_single=False,
+
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -162,118 +190,12 @@ floating_layout = layout.Floating(
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
         Match(wm_class="ssh-askpass"),  # ssh-askpass
-        Match(wm_class="floating"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
-    ],
-)
-
-# GROUP CONFIG
-groups = [Group(i) for i in "αβγδεζ"]
-
-for i in range(len(groups)):
-    keys.extend(
-        [
-            Key([mod], str(i + 1), lazy.group[groups[i].name].toscreen()),
-            Key(
-                [mod, "shift"],
-                str(i + 1),
-                lazy.window.togroup(groups[i].name, switch_group=True),
-            ),
-        ]
-    )
-
-# WIDGET CONFIG
-widget_defaults = dict(
-    font="Cascadia Code PL SemiBold",
-    fontsize=18 * SCALE,
-    padding=0,
-    foreground=new_colors["white1"],
-    background=new_colors["white5"],
-)
-extension_defaults = widget_defaults.copy()
-
-inverted_opts = dict(foreground=new_colors["white5"], background=new_colors["white1"])
-
-
-# Circle border
-def opener(**kwargs):
-    return widget.TextBox("", fontsize=34 * SCALE, **kwargs)
-
-
-def closer(**kwargs):
-    return widget.TextBox("", fontsize=30 * SCALE, **kwargs)
-
-
-# Battery setup
-battery_widgets = []
-if HAS_BATTERY:
-    battery_widgets = [
-        widget.TextBox(text="BAT="),
-        widget.Battery(format="{percent:2.0%}", update_interval=10),
-        widget.Spacer(length=20),
+        # Godot
+        Match(title="Please Confirm..."),
+        Match(title="Create Script"),
+        Match(title="Attach Node Script")
     ]
+)
 
-rainbow = ["ff595e", "ffca3a", "8ac926", "1982c4", "6a4c93"]
-
-# Widget list
-my_widgets = [
-    widget.Spacer(length=5),
-    widget.GroupBox(
-        borderwith=4,
-        highlight_method="block",
-        disable_drag=True,
-        use_mouse_wheel=False,
-        inactive=new_colors["white2"],
-        active=new_colors["white1"],
-        this_current_screen_border=new_colors["green"],
-    ),
-    widget.Spacer(length=bar.STRETCH),
-    *battery_widgets,
-    closer(foreground=rainbow[3]),
-    widget.GenPollText(
-        func=wifiLevel,
-        update_interval=1,
-        background=rainbow[3],
-        foreground=new_colors["black"],
-    ),
-    widget.Spacer(length=20, background=rainbow[3]),
-    closer(foreground=rainbow[2], background=rainbow[3]),
-    widget.Wttr(
-        location={"San Antonio": "SA"},
-        format="%t",
-        background=rainbow[2],
-        foreground=new_colors["black"],
-    ),
-    widget.Spacer(length=20, background=rainbow[2]),
-    closer(foreground=rainbow[1], background=rainbow[2]),
-    widget.Clock(format="%m/%d", background=rainbow[1], foreground=new_colors["black"]),
-    widget.Spacer(length=20, background=rainbow[1]),
-    closer(foreground=rainbow[0], background=rainbow[1]),
-    widget.Clock(
-        format="%H:%M:%S", background=rainbow[0], foreground=new_colors["black"]
-    ),
-    widget.Spacer(length=20, background=rainbow[0]),
-]
-
-# SCREEN CONFIG
-screens = [
-    Screen(
-        wallpaper="/home/logan/.config/qtile/wallpapers/wp2.png",
-        wallpaper_mode="fill",
-        # wallpaper="/home/logan/Images/wallpapers/648824.jpg",
-        # wallpaper="/home/logan/Pictures/wallpapers/648824.jpg",
-        top=bar.Bar(
-            my_widgets,
-            34 * SCALE,
-            background=new_colors["white5"],
-            border_on_single=False,
-            margin=[0, 0, 10 * SCALE, 0],
-            # border_width=[2, -2, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-        ),
-        bottom=bar.Gap(10 * SCALE),
-        left=bar.Gap(10 * SCALE),
-        right=bar.Gap(10 * SCALE),
-    ),
-]

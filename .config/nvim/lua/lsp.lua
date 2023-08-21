@@ -22,13 +22,14 @@ vim.diagnostic.config({
 -- end
 --
 vim.filetype.add({ extension = { wgsl = "wgsl" } })
-vim.filetype.add({ extension = { glsl = "vert" } })
 
 local lspconfig = require('lspconfig')
 lspconfig.wgsl_analyzer.setup{}
 lspconfig.rust_analyzer.setup{}
 lspconfig.clangd.setup{}
 lspconfig.glslls.setup{}
+-- lspconfig.pyright.setup{}
+lspconfig.jedi_language_server.setup{}
 
 
 -- setup_lsp({ "rust" }, { "rust-analyzer" })

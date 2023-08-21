@@ -30,6 +30,7 @@ return require('packer').startup(function(use)
   use 'nvim-lua/plenary.nvim'
   -- lsp
   use 'neovim/nvim-lspconfig'
+
   -- rust
   use { 'saecki/crates.nvim', config = require('crates').setup(), }
   use { 'ron-rs/ron.vim' }
@@ -55,15 +56,14 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-path'
   use 'smolck/command-completion.nvim'
   use { 'windwp/nvim-autopairs' }
-  use { "ray-x/lsp_signature.nvim", config = require("lsp_signature").setup({
-    floating_window = false,
-    hint_prefix = "",
+  -- use { "ray-x/lsp_signature.nvim" }
+   use { "ray-x/lsp_signature.nvim", config = require("lsp_signature").setup({
+   floating_window = false,
+   hint_prefix = "",
   }) }
   -- telescope
   use { 'nvim-telescope/telescope.nvim', tag = '0.1.1' }
   use 'nvim-telescope/telescope-ui-select.nvim'
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run =
-  'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
   -- commenting
   use {
     'numToStr/Comment.nvim',
@@ -80,3 +80,5 @@ return require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
+
+
