@@ -1,4 +1,7 @@
-local cmp = require("cmp")
+local ran, cmp = pcall(require, "cmp")
+if not ran then
+  return
+end
 
 cmp.setup {
   sources = {
@@ -21,10 +24,11 @@ cmp.setup {
   }
 }
 
-require("nvim-autopairs").setup()
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local ran, cmp_autopairs = pcall(require, 'nvim-autopairs.completion.cmp')
+if ran then
+  cmp.event:on(
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
+  )
+end
 
-require("cmp").event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
-)

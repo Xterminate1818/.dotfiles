@@ -32,15 +32,53 @@ return require('packer').startup(function(use)
   use 'neovim/nvim-lspconfig'
 
   -- rust
-  use { 'saecki/crates.nvim', config = require('crates').setup(), }
+  use { 'saecki/crates.nvim', 
+    requires = {{'nvim-lua/plenary.nvim', opt=false}}, 
+    config = function() 
+      require('crates').setup()
+    end
+  }
   use { 'ron-rs/ron.vim' }
   -- toggleterm
-  use { "akinsho/toggleterm.nvim", tag = '*' }
+  use { "akinsho/toggleterm.nvim", tag = '*',
+    config = function()
+      require("toggleterm").setup({
+        open_mapping = [[<c-\>]],
+        direction = 'tab',
+      })
+    end
+  }
   -- treesitter
-  use 'nvim-treesitter/nvim-treesitter'
+  use {'nvim-treesitter/nvim-treesitter', run = 'TSUpdate'}
   -- file tree
-  use {
-    'nvim-tree/nvim-tree.lua',
+  use {'nvim-tree/nvim-tree.lua',
+    config = function()
+      require("nvim-tree").setup({
+        hijack_cursor = true,
+        git = {
+          enable = false,
+        },
+        diagnostics = {
+          enable = true,
+          icons = {
+            hint = "H",
+            info = "I",
+            warning = "W",
+            error = "E",
+          },
+        },
+        renderer = {
+          highlight_opened_files = "name",
+          indent_width = 1,
+        },
+        tab = {
+          sync = {
+            open = true,
+            close = true,
+          }
+        }
+      })
+    end
   }
   use 'nvim-tree/nvim-web-devicons'
   -- colorscheme
@@ -55,14 +93,25 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-path'
   use 'smolck/command-completion.nvim'
-  use { 'windwp/nvim-autopairs' }
+  use { 'windwp/nvim-autopairs',
+    config = function() 
+      require("nvim-autopairs").setup {} 
+    end
+  }
   -- use { "ray-x/lsp_signature.nvim" }
-   use { "ray-x/lsp_signature.nvim", config = require("lsp_signature").setup({
-   floating_window = false,
-   hint_prefix = "",
-  }) }
+   use { "ray-x/lsp_signature.nvim", 
+   config = function() 
+     require("lsp_signature").setup({
+     floating_window = false,
+     hint_prefix = "",
+      }) 
+    end
+  }
   -- telescope
-  use { 'nvim-telescope/telescope.nvim', tag = '0.1.1' }
+  use { 'nvim-telescope/telescope.nvim', 
+    tag = '0.1.3',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
   use 'nvim-telescope/telescope-ui-select.nvim'
   -- commenting
   use {
@@ -72,9 +121,38 @@ return require('packer').startup(function(use)
     end
   }
   -- bufferline
-  use({
-    'willothy/nvim-cokeline',
-  })
+  use{ 'willothy/nvim-cokeline',
+    requires = { {'nvim-lua/plenary.nvim'} },
+    config = function()
+      require("cokeline").setup({
+        show_if_buffers_are_at_least = 1,
+        buffers = {
+          new_buffers_position = "number",
+        },
+        sidebar = {
+          filetype = {'NvimTree', 'neo-tree'},
+          components = {
+            {
+              text = function(buf)
+                return buf.filetype
+              end
+            }
+          }
+        },
+        components = {
+          {
+            text = function(buffer) return ' ' .. buffer.filename .. ' ' end,
+          },
+          {
+            text = ' ',
+          },
+          {
+            text = function(buffer) return '|' end
+          },
+        }
+      })
+    end
+  }
 
   if packer_bootstrap then
     require('packer').sync()

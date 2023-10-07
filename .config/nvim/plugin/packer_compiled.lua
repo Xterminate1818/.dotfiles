@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/logan/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/logan/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/logan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/logan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/logan/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/home/logan/.cache/nvim/packer_hererocks/2.1.1694285958/share/lua/5.1/?.lua;/home/logan/.cache/nvim/packer_hererocks/2.1.1694285958/share/lua/5.1/?/init.lua;/home/logan/.cache/nvim/packer_hererocks/2.1.1694285958/lib/luarocks/rocks-5.1/?.lua;/home/logan/.cache/nvim/packer_hererocks/2.1.1694285958/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/logan/.cache/nvim/packer_hererocks/2.1.1694285958/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -96,6 +96,7 @@ _G.packer_plugins = {
     url = "https://github.com/smolck/command-completion.nvim"
   },
   ["crates.nvim"] = {
+    config = { "\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vcrates\frequire\0" },
     loaded = true,
     path = "/home/logan/.local/share/nvim/site/pack/packer/start/crates.nvim",
     url = "https://github.com/saecki/crates.nvim"
@@ -107,11 +108,13 @@ _G.packer_plugins = {
     url = "https://github.com/rebelot/kanagawa.nvim"
   },
   ["lsp_signature.nvim"] = {
+    config = { "\27LJ\2\n`\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\20floating_window\1\16hint_prefix\5\nsetup\18lsp_signature\frequire\0" },
     loaded = true,
     path = "/home/logan/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
     url = "https://github.com/ray-x/lsp_signature.nvim"
   },
   ["nvim-autopairs"] = {
+    config = { "\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
     loaded = true,
     path = "/home/logan/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
@@ -122,6 +125,7 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
   ["nvim-cokeline"] = {
+    config = { "\27LJ\2\n\24\0\1\2\0\1\0\0029\1\0\0L\1\2\0\rfiletype&\0\1\4\0\2\0\5'\1\0\0009\2\1\0'\3\0\0&\1\3\1L\1\2\0\rfilename\6 \17\0\1\2\0\1\0\2'\1\0\0L\1\2\0\6|≥\2\1\0\a\0\19\0\0316\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\0034\4\3\0005\5\n\0003\6\t\0=\6\v\5>\5\1\4=\4\f\3=\3\r\0024\3\4\0005\4\15\0003\5\14\0=\5\v\4>\4\1\0035\4\16\0>\4\2\0035\4\18\0003\5\17\0=\5\v\4>\4\3\3=\3\f\2B\0\2\1K\0\1\0\1\0\0\0\1\0\1\ttext\6 \1\0\0\0\fsidebar\15components\ttext\1\0\0\0\rfiletype\1\0\0\1\3\0\0\rNvimTree\rneo-tree\fbuffers\1\0\1\25new_buffers_position\vnumber\1\0\1!show_if_buffers_are_at_least\3\1\nsetup\rcokeline\frequire\0" },
     loaded = true,
     path = "/home/logan/.local/share/nvim/site/pack/packer/start/nvim-cokeline",
     url = "https://github.com/willothy/nvim-cokeline"
@@ -132,6 +136,7 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-tree.lua"] = {
+    config = { "\27LJ\2\nü\2\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0005\4\a\0=\4\b\3=\3\t\0025\3\n\0=\3\v\0025\3\r\0005\4\f\0=\4\14\3=\3\15\2B\0\2\1K\0\1\0\btab\tsync\1\0\0\1\0\2\nclose\2\topen\2\rrenderer\1\0\2\17indent_width\3\1\27highlight_opened_files\tname\16diagnostics\nicons\1\0\4\fwarning\6W\tinfo\6I\nerror\6E\thint\6H\1\0\1\venable\2\bgit\1\0\1\venable\1\1\0\1\18hijack_cursor\2\nsetup\14nvim-tree\frequire\0" },
     loaded = true,
     path = "/home/logan/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
     url = "https://github.com/nvim-tree/nvim-tree.lua"
@@ -172,6 +177,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["toggleterm.nvim"] = {
+    config = { "\27LJ\2\n`\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\17open_mapping\n<c-\\>\14direction\btab\nsetup\15toggleterm\frequire\0" },
     loaded = true,
     path = "/home/logan/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
@@ -179,14 +185,38 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
 -- Config for: kanagawa.nvim
 time([[Config for kanagawa.nvim]], true)
 try_loadstring("\27LJ\2\nl\0\0\3\0\6\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\0016\0\3\0009\0\4\0'\2\5\0B\0\2\1K\0\1\0\30colorscheme kanagawa-wave\bcmd\bvim\nsetup\rkanagawa\frequire\0", "config", "kanagawa.nvim")
 time([[Config for kanagawa.nvim]], false)
+-- Config for: lsp_signature.nvim
+time([[Config for lsp_signature.nvim]], true)
+try_loadstring("\27LJ\2\n`\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\20floating_window\1\16hint_prefix\5\nsetup\18lsp_signature\frequire\0", "config", "lsp_signature.nvim")
+time([[Config for lsp_signature.nvim]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+try_loadstring("\27LJ\2\n`\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\17open_mapping\n<c-\\>\14direction\btab\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
+time([[Config for toggleterm.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
+-- Config for: nvim-tree.lua
+time([[Config for nvim-tree.lua]], true)
+try_loadstring("\27LJ\2\nü\2\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0005\4\a\0=\4\b\3=\3\t\0025\3\n\0=\3\v\0025\3\r\0005\4\f\0=\4\14\3=\3\15\2B\0\2\1K\0\1\0\btab\tsync\1\0\0\1\0\2\nclose\2\topen\2\rrenderer\1\0\2\17indent_width\3\1\27highlight_opened_files\tname\16diagnostics\nicons\1\0\4\fwarning\6W\tinfo\6I\nerror\6E\thint\6H\1\0\1\venable\2\bgit\1\0\1\venable\1\1\0\1\18hijack_cursor\2\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")
+time([[Config for nvim-tree.lua]], false)
+-- Config for: crates.nvim
+time([[Config for crates.nvim]], true)
+try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vcrates\frequire\0", "config", "crates.nvim")
+time([[Config for crates.nvim]], false)
+-- Config for: nvim-cokeline
+time([[Config for nvim-cokeline]], true)
+try_loadstring("\27LJ\2\n\24\0\1\2\0\1\0\0029\1\0\0L\1\2\0\rfiletype&\0\1\4\0\2\0\5'\1\0\0009\2\1\0'\3\0\0&\1\3\1L\1\2\0\rfilename\6 \17\0\1\2\0\1\0\2'\1\0\0L\1\2\0\6|≥\2\1\0\a\0\19\0\0316\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\0034\4\3\0005\5\n\0003\6\t\0=\6\v\5>\5\1\4=\4\f\3=\3\r\0024\3\4\0005\4\15\0003\5\14\0=\5\v\4>\4\1\0035\4\16\0>\4\2\0035\4\18\0003\5\17\0=\5\v\4>\4\3\3=\3\f\2B\0\2\1K\0\1\0\1\0\0\0\1\0\1\ttext\6 \1\0\0\0\fsidebar\15components\ttext\1\0\0\0\rfiletype\1\0\0\1\3\0\0\rNvimTree\rneo-tree\fbuffers\1\0\1\25new_buffers_position\vnumber\1\0\1!show_if_buffers_are_at_least\3\1\nsetup\rcokeline\frequire\0", "config", "nvim-cokeline")
+time([[Config for nvim-cokeline]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

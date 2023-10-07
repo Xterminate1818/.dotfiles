@@ -23,7 +23,11 @@ vim.diagnostic.config({
 --
 vim.filetype.add({ extension = { wgsl = "wgsl" } })
 
-local lspconfig = require('lspconfig')
+local ran, lspconfig = pcall(require, 'lspconfig')
+if not ran then
+  return
+end
+
 lspconfig.wgsl_analyzer.setup{}
 lspconfig.rust_analyzer.setup{}
 lspconfig.clangd.setup{}

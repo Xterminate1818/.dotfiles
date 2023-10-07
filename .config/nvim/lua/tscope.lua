@@ -1,4 +1,9 @@
-require('telescope').setup {
+local ran, telescope = pcall(require, 'telescope')
+if not ran then
+  return
+end
+
+telescope.setup {
   extensions = {
     ["ui-select"] = {
       require("telescope.themes").get_cursor()
@@ -6,4 +11,4 @@ require('telescope').setup {
   }
 }
 
-require("telescope").load_extension("ui-select")
+telescope.load_extension("ui-select")
