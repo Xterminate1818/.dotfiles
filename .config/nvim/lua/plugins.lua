@@ -29,12 +29,58 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'nvim-lua/plenary.nvim'
   -- lsp
-  use 'neovim/nvim-lspconfig'
-
+  use { 'neovim/nvim-lspconfig',
+    config = function()
+      local cfg = require("lspconfig")
+      -- cfg.tailwindcss.setup {
+      --   filetypes = {
+      --     "css",
+      --     "html",
+      --     "rust",
+      --   },
+      --   init_options = {
+      --     userLanguages = {
+      --       rust = "html"
+      --     }
+      --   },
+      -- }
+      cfg.rust_analyzer.setup {
+        -- Other Configs ...
+        settings = {
+          ["rust-analyzer"] = {
+            -- Other Settings ...
+            procMacro = {
+              ignored = {
+                leptos_macro = {
+                  "server",
+                  "component",
+                },
+              },
+            },
+          },
+        }
+      }
+      cfg.lua_ls.setup {}
+      cfg.html.setup {}
+      cfg.wgsl_analyzer.setup {}
+      cfg.clangd.setup {}
+    end
+  }
+  use { 'mfussenegger/nvim-lint' }
+  -- use 'williamboman/mason-lspconfig'
+  -- use { 'williamboman/mason.nvim',
+  --   config = function()
+  --     require("mason").setup()
+  --     require("mason-lspconfig").setup {
+  --       automatic_installation = true,
+  --     }
+  --     require("lspconfig").rust_analyzer.setup {}
+  --   end
+  -- }
   -- rust
-  use { 'saecki/crates.nvim', 
-    requires = {{'nvim-lua/plenary.nvim', opt=false}}, 
-    config = function() 
+  use { 'saecki/crates.nvim',
+    requires = { { 'nvim-lua/plenary.nvim', opt = false } },
+    config = function()
       require('crates').setup()
     end
   }
@@ -49,9 +95,9 @@ return require('packer').startup(function(use)
     end
   }
   -- treesitter
-  use {'nvim-treesitter/nvim-treesitter', run = 'TSUpdate'}
+  use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
   -- file tree
-  use {'nvim-tree/nvim-tree.lua',
+  use { 'nvim-tree/nvim-tree.lua',
     config = function()
       require("nvim-tree").setup({
         hijack_cursor = true,
@@ -94,23 +140,22 @@ return require('packer').startup(function(use)
   use 'hrsh7th/cmp-path'
   use 'smolck/command-completion.nvim'
   use { 'windwp/nvim-autopairs',
-    config = function() 
-      require("nvim-autopairs").setup {} 
+    config = function()
+      require("nvim-autopairs").setup {}
     end
   }
-  -- use { "ray-x/lsp_signature.nvim" }
-   use { "ray-x/lsp_signature.nvim", 
-   config = function() 
-     require("lsp_signature").setup({
-     floating_window = false,
-     hint_prefix = "",
-      }) 
+  use { "ray-x/lsp_signature.nvim",
+    config = function()
+      require("lsp_signature").setup({
+        floating_window = false,
+        hint_prefix = "",
+      })
     end
   }
   -- telescope
-  use { 'nvim-telescope/telescope.nvim', 
+  use { 'nvim-telescope/telescope.nvim',
     tag = '0.1.3',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { { 'nvim-lua/plenary.nvim' } }
   }
   use 'nvim-telescope/telescope-ui-select.nvim'
   -- commenting
@@ -121,8 +166,8 @@ return require('packer').startup(function(use)
     end
   }
   -- bufferline
-  use{ 'willothy/nvim-cokeline',
-    requires = { {'nvim-lua/plenary.nvim'} },
+  use { 'willothy/nvim-cokeline',
+    requires = { { 'nvim-lua/plenary.nvim' } },
     config = function()
       require("cokeline").setup({
         show_if_buffers_are_at_least = 1,
@@ -130,11 +175,11 @@ return require('packer').startup(function(use)
           new_buffers_position = "number",
         },
         sidebar = {
-          filetype = {'NvimTree', 'neo-tree'},
+          filetype = { 'NvimTree', 'neo-tree' },
           components = {
             {
               text = function(buf)
-                return buf.filetype
+                return 'Files'
               end
             }
           }
@@ -142,12 +187,6 @@ return require('packer').startup(function(use)
         components = {
           {
             text = function(buffer) return ' ' .. buffer.filename .. ' ' end,
-          },
-          {
-            text = ' ',
-          },
-          {
-            text = function(buffer) return '|' end
           },
         }
       })
@@ -158,5 +197,3 @@ return require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
-
-
