@@ -58,7 +58,9 @@ nmap("<S-h>", "<Plug>(cokeline-focus-prev)")
 nmap("<S-l>", "<Plug>(cokeline-focus-next)")
 
 -- Run
-nmap("<leader>rr", ':w<cr>:TermExec cmd="cargo run"<cr>')
+nmap("<F4>", ':wa!<cr>:TermExec cmd="cargo build"<cr>')
+nmap("<F5>", ':wa!<cr>:TermExec cmd="cargo run"<cr>')
+nmap("<F6>", ':wa!<cr>:TermExec cmd="cargo run --release"<cr>')
 nmap("<leader>rt", ':w<cr>:TermExec cmd="cargo test"<cr>')
 
 -- Close current buffer

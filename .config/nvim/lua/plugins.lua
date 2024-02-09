@@ -44,6 +44,7 @@ return require('packer').startup(function(use)
       --     }
       --   },
       -- }
+      cfg.typos_lsp.setup {}
       cfg.rust_analyzer.setup {
         -- Other Configs ...
         settings = {
@@ -62,8 +63,24 @@ return require('packer').startup(function(use)
       }
       cfg.lua_ls.setup {}
       cfg.html.setup {}
-      cfg.wgsl_analyzer.setup {}
-      cfg.clangd.setup {}
+      cfg.wgsl_analyzer.setup {
+        filetypes = { "wgsl" },
+      }
+      cfg.texlab.setup {}
+      cfg.clangd.setup {
+        cmd = { "clangd",
+          "--offset-encoding=utf-16",
+          "--all-scopes-completion",
+          "--suggest-missing-includes",
+          "--background-index",
+          "--pch-storage=disk",
+          "--cross-file-rename",
+          "--log=info",
+          "--completion-style=detailed",
+          "--clang-tidy",
+        }
+      }
+      cfg.jedi_language_server.setup {}
     end
   }
   use { 'mfussenegger/nvim-lint' }
@@ -96,6 +113,13 @@ return require('packer').startup(function(use)
   }
   -- treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
+  -- fidget loading
+  use { "j-hui/fidget.nvim",
+    config = function()
+      require("fidget").setup({})
+    end
+  }
+
   -- file tree
   use { 'nvim-tree/nvim-tree.lua',
     config = function()
